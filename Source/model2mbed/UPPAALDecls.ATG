@@ -1,0 +1,289 @@
+/*
+*  Pacemaker4Mbed (c) 2014 Ariel Eizenberg - arieleiz@seas.upenn.edu.
+*  Developed for UPENN CIS 541 course project - verifiable pacemaker.
+*
+*    This file is part of Pacemaker4Mbed. You can redistribute it and/or modify
+*    it under the terms of the Academic Free License 3.0
+*	  (http://opensource.org/licenses/AFL-3.0).
+*
+*/
+
+using System.Collections;
+using System.Collections.Generic;
+using System.Text;
+using System.Globalization;
+
+COMPILER UPPAALDECL
+	public model2mbed.Declarations decls = new model2mbed.Declarations();
+
+bool IsChanPriority()
+{
+	scanner.ResetPeek();
+	var x = scanner.Peek();
+	if(x.kind == _priority)
+		return true;
+	return false;
+}
+
+CHARACTERS
+	  letter = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz_".
+	  digit = "0123456789".
+	  nzdigit = "123456789".
+	  hexdigit = "0123456789ABCDEF".
+	  cr  = '\r'.
+	  lf  = '\n'.
+	  tab = '\t'.
+
+TOKENS
+  ident  = letter {letter | digit}.
+  number = ( '0' | nzdigit {digit} ).
+  hexnumber = '0' 'x' hexdigit { hexdigit }.
+  priority = "priority".
+
+COMMENTS FROM "/*" TO "*/" NESTED
+COMMENTS FROM "//" TO lf
+
+IGNORE cr + lf + tab
+
+PRODUCTIONS
+
+UPPAALDECL				
+  = { Declaration }
+.
+
+Declaration			     
+= 
+    ( "typedef" Typedef 
+	| IF(IsChanPriority()) "chan" priority ChanPriorityDecl 
+	| VarDecl  
+	) ';'
+.
+
+Typedef						(. string name; model2mbed.TypeDecl typdecl; .)  
+= 
+  TypeDecl<out typdecl>  
+  Ident<out name>                 (. decls.Add(new model2mbed.TypedefDecl() { Name = name, Type = typdecl } ); .)
+.
+
+VarDecl
+=						   (. model2mbed.TypeDecl type;  .)
+	 TypeDecl<out type>
+	 VarNameDecl<type>
+	 { ',' VarNameDecl<type> }
+.
+
+VarNameDecl<model2mbed.TypeDecl type> 
+= 					   (. string name; model2mbed.Expression arg1 = null, arg2 = null; .)
+	 Ident<out name>		   (. model2mbed.VarDecl vardecl = new model2mbed.VarDecl(name, type); decls.Add(vardecl); .)
+		[ 
+		'[' Expression<out arg1> ']'  
+				(. 
+					int low = 0, length = 0;
+					if(!decls.getArrSizeValue(arg1, out low, out length))
+						throw new FatalError("Could not calculate array size!");
+					vardecl.IsArray = true;
+					vardecl.ArrLow = low; 
+					vardecl.ArrLength = length; 
+				.)
+		]
+     [ 
+	 '='
+	  Expression<out arg2>	 (. vardecl.Expr = arg2; vardecl.HasExpr = true; .)
+	 ]	
+.
+	
+TypeDecl<out model2mbed.TypeDecl data>			(. data = new model2mbed.TypeDecl(); string tname; model2mbed.Expression arg1 = null, arg2 = null; .)
+=
+	{ "const"			(. data.Const = true; .)
+	  | "urgent"		(. data.Urgent = true; .)
+	  | "broadcast"		(. data.Broadcast = true; .)
+	  | "meta"			
+	  }  
+	( "int"             (. data.Type = model2mbed.VarType.Int; .)
+	  | "bool"          (. data.Type = model2mbed.VarType.Int; .)
+	  | "clock"			(. data.Type = model2mbed.VarType.Clock; .)
+	  | "chan"			(. data.Type = model2mbed.VarType.Channel; .)
+	  | Ident<out tname>   (. data = decls.normalizeType(data, tname); .)
+	) [ 
+	    '[' Expression<out arg1> ',' Expression<out arg2> ']' 
+				(. 
+					int low, high;
+					if(!decls.getExprValue(arg1, out low) || !decls.getExprValue(arg2, out high))
+						throw new model2mbed.ParseException("Array ranges must evaluate to consts!");
+					data.SetRange(low, high); 
+				.)
+	  ]                 
+.
+
+Expression<out model2mbed.Expression expr>
+=									(. model2mbed.Expression arg1 = null; .)
+  LogWordOrExpr<out arg1>           (. expr = arg1; .)
+.
+	
+LogWordOrExpr  <out model2mbed.Expression expr> (. model2mbed.Expression arg1 = null, arg2 = null; .)
+= 
+	LogWordAndExpr<out arg1>		(. expr = arg1; .)
+	[ "or"	LogWordAndExpr<out arg2> 		(. expr = new model2mbed.Expression(model2mbed.Expression.Funcs.LogicalOr, arg1, arg2);  .)
+	]
+.
+
+LogWordAndExpr <out model2mbed.Expression expr> (. model2mbed.Expression arg1 = null, arg2 = null; .)
+= (
+	LogWordNotExpr<out arg1>			(. expr = arg1; .)
+	[ "and" LogWordNotExpr<out arg2>	(. expr = new model2mbed.Expression(model2mbed.Expression.Funcs.LogicalAnd, arg1, arg2); .)
+	]
+  )
+.
+
+
+LogWordNotExpr <out model2mbed.Expression expr> (. model2mbed.Expression arg1 = null; expr = null; .)
+= (
+	"not" CondExpr<out arg1>  (. expr = new model2mbed.Expression(model2mbed.Expression.Funcs.LogicalNot, arg1); .)
+	| CondExpr<out arg1> (. expr = arg1; .)
+  )
+.
+
+CondExpr<out model2mbed.Expression expr> (. model2mbed.Expression arg1 = null, arg2 = null, arg3 = null; .)
+= LogOrExpr<out arg1>			(. expr = arg1; .)
+  [
+	'?' CondExpr<out arg2> ':' CondExpr<out arg3> (. expr = new model2mbed.Expression(model2mbed.Expression.Funcs.IfThenElse, arg1, arg2, arg3); .)
+  ] 
+.
+
+LogOrExpr  <out model2mbed.Expression expr> (. model2mbed.Expression arg1 = null, arg2 = null; .)
+= 
+	LogAndExpr<out arg1>		(. expr = arg1; .)
+	[ "||"	LogAndExpr<out arg2> (. expr = new model2mbed.Expression(model2mbed.Expression.Funcs.LogicalOr, arg1, arg2); .)
+	]
+.
+
+LogAndExpr <out model2mbed.Expression expr> (. model2mbed.Expression arg1 = null, arg2 = null; .)
+= (
+	BitExpr<out arg1>			(. expr = arg1; .)
+	[ "&&"	BitExpr<out arg2>	(. expr = new model2mbed.Expression(model2mbed.Expression.Funcs.LogicalAnd, arg1, arg2); .)
+	]
+  )
+.
+
+
+BitExpr<out model2mbed.Expression expr> (. model2mbed.Expression arg1 = null, arg2 = null; .)
+= 
+	  EqlExpr<out arg1>						    (. expr = arg1; .)
+	[
+	  '&'	EqlExpr<out arg2>	(. expr = new model2mbed.Expression(model2mbed.Expression.Funcs.BitAnd, arg1, arg2); .)
+	| '^'	EqlExpr<out arg2>	(. expr = new model2mbed.Expression(model2mbed.Expression.Funcs.BitXor, arg1, arg2); .)
+	| '|'	EqlExpr<out arg2>	(. expr = new model2mbed.Expression(model2mbed.Expression.Funcs.BitOr, arg1, arg2); .)
+	]
+.
+
+EqlExpr<out model2mbed.Expression expr> (. model2mbed.Expression arg1 = null, arg2 = null; .)
+= 	  RelExpr<out arg1>							    (. expr = arg1; .)
+	[
+	  "=="	RelExpr<out arg2>	(. expr = new model2mbed.Expression(model2mbed.Expression.Funcs.Equal, arg1, arg2); .)
+	| "!="	RelExpr<out arg2>	(. expr = new model2mbed.Expression(model2mbed.Expression.Funcs.NotEqual, arg1, arg2); .)
+	]
+.
+
+RelExpr<out model2mbed.Expression expr> (. model2mbed.Expression arg1 = null, arg2 = null; .)
+  =
+      MinMaxExpr<out arg1>									(. expr = arg1; .)
+	[
+	  '>'		MinMaxExpr<out arg2>	(. expr = new model2mbed.Expression(model2mbed.Expression.Funcs.Larger, arg1, arg2); .)
+	| ">="		MinMaxExpr<out arg2>	(. expr = new model2mbed.Expression(model2mbed.Expression.Funcs.LargerEqual, arg1, arg2); .)
+	| '<'		MinMaxExpr<out arg2>	(. expr = new model2mbed.Expression(model2mbed.Expression.Funcs.Smaller, arg1, arg2); .)
+	| "<="		MinMaxExpr<out arg2>	(. expr = new model2mbed.Expression(model2mbed.Expression.Funcs.SmallEqual, arg1, arg2); .)
+	]
+.
+
+MinMaxExpr<out model2mbed.Expression expr> (. model2mbed.Expression arg1 = null, arg2 = null; .)
+   = AddExpr<out arg1>						(. expr = arg1; .)
+     [
+	   "<?" AddExpr<out arg2> (. expr = new model2mbed.Expression(model2mbed.Expression.Funcs.Min, arg1, arg2); .)
+	 | ">?" AddExpr<out arg2> (. expr = new model2mbed.Expression(model2mbed.Expression.Funcs.Max, arg1, arg2); .)
+	 ]
+.
+
+AddExpr<out model2mbed.Expression expr> (. model2mbed.Expression arg1 = null, arg2 = null; .)
+   = MultExpr<out arg1>                        (. expr = arg1; .)
+	[
+       '+' MultExpr<out arg2> (. expr = new model2mbed.Expression(model2mbed.Expression.Funcs.BinPlus, arg1, arg2); .)
+	 | '-' MultExpr<out arg2> (. expr = new model2mbed.Expression(model2mbed.Expression.Funcs.BinMinus, arg1, arg2); .)
+	]
+.
+
+MultExpr<out model2mbed.Expression expr> (. model2mbed.Expression arg1 = null, arg2 = null; .)
+   =  UnaryExpr<out arg1>	   (. expr = arg1; .)
+     [
+	     '*' UnaryExpr<out arg2> (. expr = new model2mbed.Expression(model2mbed.Expression.Funcs.Multi, arg1, arg2); .)
+       | '/' UnaryExpr<out arg2> (. expr = new model2mbed.Expression(model2mbed.Expression.Funcs.Divide, arg1, arg2); .)
+	   | '%' UnaryExpr<out arg2> (. expr = new model2mbed.Expression(model2mbed.Expression.Funcs.Modulus, arg1, arg2); .)
+	 ]
+.
+
+UnaryExpr<out model2mbed.Expression expr> (. model2mbed.Expression arg1 = null; expr = null; .)
+ =
+  ( PostfixExpr<out arg1>			(. expr = arg1; .)
+	| '+' PostfixExpr<out arg1>		(. expr = new model2mbed.Expression(model2mbed.Expression.Funcs.UniPlus, arg1, null); .)
+	| '-' PostfixExpr<out arg1>		(. expr = new model2mbed.Expression(model2mbed.Expression.Funcs.UniMinus, arg1, null); .)
+	| "++" PostfixExpr<out arg1>		(. expr = new model2mbed.Expression(model2mbed.Expression.Funcs.UniPlusPlusPre, arg1, null); .)
+	| "--" PostfixExpr<out arg1>		(. expr = new model2mbed.Expression(model2mbed.Expression.Funcs.UniMinusMinusPre, arg1, null); .)
+	| '!' UnaryExpr<out arg1>		(. expr = new model2mbed.Expression(model2mbed.Expression.Funcs.LogicalNot, arg1, null); .)
+  ).
+
+
+PostfixExpr<out model2mbed.Expression expr> (. model2mbed.Expression arg1 = null, arg2 = null; .)
+=
+  Primary<out arg1>							(. expr = arg1; .)
+  [
+    '[' Expression<out arg2> ']'			(. expr = new model2mbed.Expression(model2mbed.Expression.Funcs.ArrayIndex, arg1, arg2); .)
+  | '('									 (. List<model2mbed.Expression> funcArgs = new List<model2mbed.Expression>(); .)
+		[ 
+		    Expression<out arg2>		 (. funcArgs.Add(arg2); .)
+			{ ',' Expression<out arg2> } (. funcArgs.Add(arg2); .)
+		  
+        ] 
+	')'										(. expr = model2mbed.Expression.CreateCustomFunc(arg1, funcArgs); .)							
+  | "++"									(. expr = new model2mbed.Expression(model2mbed.Expression.Funcs.UniPlusPlusPost, arg1, null); .)
+  | "--"									(. expr = new model2mbed.Expression(model2mbed.Expression.Funcs.UniMinusMinusPost, arg1, null); .)
+  ].
+
+Primary<out model2mbed.Expression expr> (. model2mbed.Expression arg1 = null; expr = null; .)
+ = (
+	  ident (. expr = new model2mbed.Expression(t.val); .)
+	  | number (. expr = new model2mbed.Expression(Int32.Parse(t.val)); .)
+	  | hexnumber (. expr = new model2mbed.Expression(Int32.Parse(t.val, NumberStyles.HexNumber)); .)
+	  | '(' Expression<out arg1> ')' (. expr = arg1; .)
+	)
+.
+
+ChanPriorityDecl  (. model2mbed.Expression expr = null; .)
+  = (
+			(   ChanExpr<out expr> (. decls.setChannelPriority(expr); .)
+			  | "default"		   (. decls.setChannelDefaultPriority(); .)
+			  )   
+			{ 
+				(    ',' 
+				  |  '<'             (. decls.nextChannelPriority(); .)
+				)
+				(ChanExpr<out expr>  (. decls.setChannelPriority(expr); .)
+				 | "default"		 (. decls.setChannelDefaultPriority(); .)
+				)
+			}
+    )
+.
+
+ChanExpr <out model2mbed.Expression expr> (. model2mbed.Expression arg1 = null, arg2 = null; .)
+  = (
+		Primary<out arg1> (. expr = arg1; .)
+		[
+			'[' Expression<out arg2> ']' (. expr = new model2mbed.Expression(model2mbed.Expression.Funcs.ArrayIndex, arg1, arg2); .)
+		]
+   )
+.
+
+Ident<out string value>
+= ident                  (. value = t.val; .)
+.
+
+END UPPAALDECL.
+

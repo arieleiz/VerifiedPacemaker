@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2015 sp2 (x64) (http://www.altova.com) by Ariel Eizenberg (Student) -->
+<mbedsimulator>
+	<mbed name="tsta" dll="mbedsimulatortst1.dll">
+		<textlcd/>
+		<serial/>
+    <led name="led2" pin="p5" extra="red" />
+    <pushbutton name="button1" pin="p7" />
+    <switch name="button2" pin="p8" />
+    <crossover name="cross1" pin="p9" extra="tstb" />
+	</mbed>
+	<mbed name="tstb" dll="mbedsimulatortst1.dll">
+		<textlcd/>
+		<serial/>
+    <led name="led2" pin="p5" />
+    <pushbutton name="buttonA" pin="p7" />
+    <switch name="buttonB" pin="p8" />
+    <crossover name="cross1" pin="p9" extra="tsta" />
+	</mbed>
+</mbedsimulator>

@@ -1,0 +1,16 @@
+make cleanall
+make all
+arm-none-eabi-gdb *.elf
+
+gdb:
+target extended-remote localhost:3333
+load
+set remote hardware-breakpoint-limit 6
+set remote hardware-watchpoint-limit 4
+define hook-step
+mon cortex_m maskisr on
+end
+define hookpost-step
+mon cortex_m maskisr off
+end
+continue

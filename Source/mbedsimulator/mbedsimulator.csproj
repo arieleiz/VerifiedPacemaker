@@ -1,0 +1,213 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{88D2565F-3DA6-4751-A794-4104C5B90B04}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>mbedsimulator</RootNamespace>
+    <AssemblyName>mbedsimulator</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DataLoader.cs" />
+    <Compile Include="DataModel.cs" />
+    <Compile Include="FuzzerDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FuzzerDialog.Designer.cs">
+      <DependentUpon>FuzzerDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GPIOElement.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GPIOElement.Designer.cs">
+      <DependentUpon>GPIOElement.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Crossover.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Crossover.Designer.cs">
+      <DependentUpon>Crossover.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Ground.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Ground.Designer.cs">
+      <DependentUpon>Ground.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Vout.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Vout.Designer.cs">
+      <DependentUpon>Vout.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Switch.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Switch.Designer.cs">
+      <DependentUpon>Switch.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PushButton.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PushButton.Designer.cs">
+      <DependentUpon>PushButton.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LED.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="LED.Designer.cs">
+      <DependentUpon>LED.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MbedSimulatorPane.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="MbedSimulatorPane.Designer.cs">
+      <DependentUpon>MbedSimulatorPane.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MsgType.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SerialConsole.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="SerialQueue.cs" />
+    <EmbeddedResource Include="FuzzerDialog.resx">
+      <DependentUpon>FuzzerDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GPIOElement.resx">
+      <DependentUpon>GPIOElement.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Crossover.resx">
+      <DependentUpon>Crossover.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Ground.resx">
+      <DependentUpon>Ground.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Vout.resx">
+      <DependentUpon>Vout.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Switch.resx">
+      <DependentUpon>Switch.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PushButton.resx">
+      <DependentUpon>PushButton.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LED.resx">
+      <DependentUpon>LED.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MbedSimulatorPane.resx">
+      <DependentUpon>MbedSimulatorPane.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\lcdlabel\lcdlabel.csproj">
+      <Project>{6B3DF3A6-62FE-4523-825A-975085C6C2ED}</Project>
+      <Name>lcdlabel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\mbedsimulatorctr\mbedsimulatorctr.vcxproj">
+      <Project>{681dc386-0059-4ea7-83b6-aef1b9403df8}</Project>
+      <Name>mbedsimulatorctr</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\mbedsimulatortypes\mbedsimulatortypes.csproj">
+      <Project>{0cc43828-f6e7-4dcc-8745-ba7b27dfeac6}</Project>
+      <Name>mbedsimulatortypes</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="yellowon.png" />
+    <None Include="yellowoff.png" />
+    <None Include="blueoff.png" />
+    <None Include="blueon.png" />
+    <Content Include="components.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <None Include="greenoff.png" />
+    <None Include="greenon.png" />
+    <None Include="redoff.png" />
+    <None Include="redon.png" />
+    <None Include="pushbuttonclose.png" />
+    <None Include="pushbuttonopen.png" />
+    <None Include="switchclose.png" />
+    <None Include="switchopen.png" />
+    <Content Include="XMLFile1.xml" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

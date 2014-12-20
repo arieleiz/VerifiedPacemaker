@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mbedsimulator>
+	<mbed name="pacemaker" dll="pacemaker.dll" viz="HeartRateVirualizer.dll">
+		<textlcd/>
+		<serial/>
+		<crossover name="SignalA" pin="p30" extra="heart"  />
+		<crossover name="SignalV" pin="p29" extra="heart"  />
+		<crossover name="PaceA" pin="p28" extra="heart"  />
+		<crossover name="PaceV" pin="p27" extra="heart"  />
+		<ground name="HM/PM selector" pin="p26" />
+	</mbed>
+	<mbed name="heart" dll="heart.dll" viz="HeartRateVirualizer.dll">
+		<textlcd/>
+		<serial/>
+		<crossover name="SignalA" pin="p11" extra="pacemaker"  />
+		<crossover name="SignalV" pin="p12" extra="pacemaker" />
+		<crossover name="PaceA" pin="p13" extra="pacemaker" />
+		<crossover name="PaceV" pin="p14" extra="pacemaker"  />
+		<vout name="HM/PM selector" pin="p26" />
+	</mbed>
+</mbedsimulator>

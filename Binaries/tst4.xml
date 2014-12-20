@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2015 sp2 (x64) (http://www.altova.com) by Ariel Eizenberg (Student) -->
+<mbedsimulator>
+	<mbed name="tsta" dll="mbedsimulatortst4.dll" viz="HeartRateVirualizer.dll">
+		<textlcd/>
+		<serial/>
+		<pushbutton name="SignalA" pin="p9" />
+		<pushbutton name="SignalV" pin="p10" />
+		<ground name="HM/PM selector" pin="p13" />
+	</mbed>
+</mbedsimulator>

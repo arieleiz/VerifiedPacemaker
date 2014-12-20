@@ -1,0 +1,172 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{DE114898-FDDA-47C7-AB7B-74F84660F9C3}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>mbedsimulatorapi</RootNamespace>
+    <SccProjectName>Svn</SccProjectName>
+    <SccAuxPath>Svn</SccAuxPath>
+    <SccLocalPath>Svn</SccLocalPath>
+    <SccProvider>SubversionScc</SccProvider>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <IntDir>$(SolutionDir)\obj\debug\$(Configuration)\$(ProjectName)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <IntDir>$(SolutionDir)\obj\debug\$(Configuration)\$(ProjectName)\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level4</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(SolutionDir);$(SolutionDir)\mbedsimulatorapi</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level4</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(SolutionDir);$(SolutionDir)\mbedsimulatorapi</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="AE\gpio.cpp" />
+    <ClCompile Include="AE\main.cpp" />
+    <ClCompile Include="AE\rtos.cpp" />
+    <ClCompile Include="AE\UsTicker.cpp" />
+    <ClCompile Include="FunctionPointer.cpp" />
+    <ClCompile Include="InterruptIn.cpp" />
+    <ClCompile Include="Mutex.cpp" />
+    <ClCompile Include="Thread.cpp" />
+    <ClCompile Include="Ticker.cpp" />
+    <ClCompile Include="Timeout.cpp" />
+    <ClCompile Include="Timer.cpp" />
+    <ClCompile Include="TimerEvent.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="AE\RtosTimer.h" />
+    <ClInclude Include="AE\SerialBase.h" />
+    <ClInclude Include="AE\simhw.hpp" />
+    <ClInclude Include="AE\TextLCD.h" />
+    <ClInclude Include="AE\W32Thread.hpp" />
+    <ClInclude Include="AnalogIn.h" />
+    <ClInclude Include="AnalogOut.h" />
+    <ClInclude Include="BusIn.h" />
+    <ClInclude Include="BusInOut.h" />
+    <ClInclude Include="BusOut.h" />
+    <ClInclude Include="CallChain.h" />
+    <ClInclude Include="CAN.h" />
+    <ClInclude Include="can_helper.h" />
+    <ClInclude Include="cmsis_os.h" />
+    <ClInclude Include="device.h" />
+    <ClInclude Include="DigitalIn.h" />
+    <ClInclude Include="DigitalInOut.h" />
+    <ClInclude Include="DigitalOut.h" />
+    <ClInclude Include="Ethernet.h" />
+    <ClInclude Include="FileHandle.h" />
+    <ClInclude Include="FileLike.h" />
+    <ClInclude Include="FunctionPointer.h" />
+    <ClInclude Include="gpio_api.h" />
+    <ClInclude Include="gpio_irq_api.h" />
+    <ClInclude Include="I2C.h" />
+    <ClInclude Include="I2CSlave.h" />
+    <ClInclude Include="InterruptIn.h" />
+    <ClInclude Include="InterruptManager.h" />
+    <ClInclude Include="Mail.h" />
+    <ClInclude Include="mbed.h" />
+    <ClInclude Include="mbed_assert.h" />
+    <ClInclude Include="mbed_debug.h" />
+    <ClInclude Include="mbed_error.h" />
+    <ClInclude Include="mbed_interface.h" />
+    <ClInclude Include="MemoryPool.h" />
+    <ClInclude Include="Mutex.h" />
+    <ClInclude Include="PeripheralNames.h" />
+    <ClInclude Include="PinNames.h" />
+    <ClInclude Include="platform.h" />
+    <ClInclude Include="PortIn.h" />
+    <ClInclude Include="PortInOut.h" />
+    <ClInclude Include="PortNames.h" />
+    <ClInclude Include="PortOut.h" />
+    <ClInclude Include="port_api.h" />
+    <ClInclude Include="PwmOut.h" />
+    <ClInclude Include="Queue.h" />
+    <ClInclude Include="RawSerial.h" />
+    <ClInclude Include="reserved_pins.h" />
+    <ClInclude Include="rtc_time.h" />
+    <ClInclude Include="rtos.h" />
+    <ClInclude Include="RtosTimer.h" />
+    <ClInclude Include="Semaphore.h" />
+    <ClInclude Include="semihost_api.h" />
+    <ClInclude Include="Serial.h" />
+    <ClInclude Include="SerialBase.h" />
+    <ClInclude Include="serial_api.h" />
+    <ClInclude Include="sleep_api.h" />
+    <ClInclude Include="SPI.h" />
+    <ClInclude Include="SPISlave.h" />
+    <ClInclude Include="Stream.h" />
+    <ClInclude Include="TextLCD.h" />
+    <ClInclude Include="Thread.h" />
+    <ClInclude Include="Ticker.h" />
+    <ClInclude Include="Timeout.h" />
+    <ClInclude Include="Timer.h" />
+    <ClInclude Include="TimerEvent.h" />
+    <ClInclude Include="toolchain.h" />
+    <ClInclude Include="us_ticker_api.h" />
+    <ClInclude Include="wait_api.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

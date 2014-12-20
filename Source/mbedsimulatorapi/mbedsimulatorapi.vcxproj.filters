@@ -1,0 +1,267 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="AE">
+      <UniqueIdentifier>{dbd49fbe-4613-44d8-ae70-2f67fd87b151}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="FunctionPointer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Thread.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="InterruptIn.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Ticker.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Timeout.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Timer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TimerEvent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Mutex.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AE\gpio.cpp">
+      <Filter>AE</Filter>
+    </ClCompile>
+    <ClCompile Include="AE\main.cpp">
+      <Filter>AE</Filter>
+    </ClCompile>
+    <ClCompile Include="AE\rtos.cpp">
+      <Filter>AE</Filter>
+    </ClCompile>
+    <ClCompile Include="AE\UsTicker.cpp">
+      <Filter>AE</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="AnalogIn.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AnalogOut.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BusIn.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BusInOut.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BusOut.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CallChain.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CAN.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="can_helper.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DigitalIn.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DigitalInOut.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DigitalOut.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Ethernet.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="FunctionPointer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="I2C.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="I2CSlave.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="InterruptIn.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="InterruptManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="mbed.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="mbed_assert.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="mbed_debug.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="mbed_error.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="mbed_interface.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="platform.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PortIn.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PortInOut.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PortOut.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PwmOut.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RawSerial.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="rtc_time.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="semihost_api.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Serial.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SerialBase.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SPI.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SPISlave.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Ticker.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Timeout.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Timer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TimerEvent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="toolchain.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="wait_api.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="device.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PinNames.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="reserved_pins.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PeripheralNames.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="gpio_api.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PortNames.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="port_api.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Stream.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="FileLike.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="FileHandle.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="serial_api.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="us_ticker_api.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="gpio_irq_api.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sleep_api.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="rtos.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TextLCD.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cmsis_os.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Mail.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MemoryPool.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Mutex.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Queue.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RtosTimer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Semaphore.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Thread.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AE\RtosTimer.h">
+      <Filter>AE</Filter>
+    </ClInclude>
+    <ClInclude Include="AE\SerialBase.h">
+      <Filter>AE</Filter>
+    </ClInclude>
+    <ClInclude Include="AE\simhw.hpp">
+      <Filter>AE</Filter>
+    </ClInclude>
+    <ClInclude Include="AE\TextLCD.h">
+      <Filter>AE</Filter>
+    </ClInclude>
+    <ClInclude Include="AE\W32Thread.hpp">
+      <Filter>AE</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

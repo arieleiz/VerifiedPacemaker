@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2015 sp2 (x64) (http://www.altova.com) by Ariel Eizenberg (Student) -->
+<mbedsimulator>
+	<mbed name="tsta" dll="mbedsimulatortst2.dll">
+		<textlcd/>
+		<serial/>
+		<pushbutton name="buttonA" pin="p7" />
+	</mbed>
+</mbedsimulator>
