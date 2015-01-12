@@ -1,4 +1,4 @@
-# VerifiedPacemakregith
+# VerifiedPacemaker
 
 This repository is a heart pacemaker implemented on the MBED platform for the UPENN CIS541 course in Fall 2014.
 
