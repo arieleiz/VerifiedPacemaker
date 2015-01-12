@@ -19,7 +19,7 @@ The following features were modelled, implemented and tested as part of the proj
    supports most of the UPPAAL language. The generator was verified against several models and
    then used to generate code for the pacemaker and heart. The auto-generated code was used with
    no changes, as-is, for the final implementation of both pacemaker and heart.
-   Simulator – A CMSIS OS 2 simulator for Windows was developed for rapid development and testing
+-  Simulator – A CMSIS OS 2 simulator for Windows was developed for rapid development and testing
    on a PC before deployment to the embedded environment. The simulator does not require any
    code changes in the MBED program, just compiling it using a PC compiler and linking with a stub
    library. This allows for comprehensive testing using tools available for PC and not on embedded
