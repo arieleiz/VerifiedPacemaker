@@ -35,3 +35,4 @@ The following features were modelled, implemented and tested as part of the proj
    
 Further information is available in AEPacemaker.pdf.
 
+Tags: Pacemaker, Verified, Code Verification, MBED, MBED simulator, MBED Windows cross compiler, CMSIS Windows cross compiler.
